@@ -2,11 +2,11 @@
 # Building my first set of tables using the CQL console in Astra #
 
 After having attended recently the "Intro to Cassandra for Developers Workshop" I have experimented with what I have learnt in the workshop to further my learning journey. 
-I have forked the existing repositry shared in the workshop and have updated it with my  own examples.
+I have forked the existing repository shared in the workshop and have updated it with my  own examples.
 
 ## Explain your use case ##
 ```
-Here I am trying to replicate the data model of a learning application in Astra. I have created 3 tables:
+Here I am trying to replicate the data model of a learning mmanagement system in Astra. I have created 3 tables as below:
 1. curriculum_master
 2. learner_master
 3. learner_curriculum
