@@ -15,10 +15,13 @@ Here I am tryingto replicate the data model of a learning application in Astra. 
 Example tables that we used in the workshop:
 
 ## Astra Details ##
+
 My login - aniruddha.bhattacharya.sap@gmail.com
 Database User Name - ANIRUDDHAB85
 Database - ABH85
+
 ## Table: curriculum_master ##
+
 ```
 
 ANIRUDDHAB85@cqlsh:ABHKS> CREATE TABLE IF NOT EXISTS curriculum_master (
@@ -59,9 +62,10 @@ ANIRUDDHAB85@cqlsh:ABHKS> desc tables;
 learner_curriculum  curriculum_master  users_by_city
 learner_master      comments_by_user   comments_by_video
 ```
-Update with your own table
+## Updated with my own table ##
+
 learner_curriculum  curriculum_master learner_master
-```
+
 ## Insert some data ##
 
 Here some example data that we used in the workshop:
@@ -71,19 +75,27 @@ Here some example data that we used in the workshop:
 ## My own data inserts, into my table curriculum_master: #
 INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
          ... VALUES ( 11111111-1111-1111-1111-111111111111, 'Introduction to Cassandra for Developers', 'active', now(),'Course Era');
+
 INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
          ... VALUES ( 21111111-1111-1111-1111-111111111111, 'Building CRUD applications with Python and NodeJS', 'active', now(),'Course Era' );
+
 INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
          ... VALUES ( 31111111-1111-1111-1111-111111111111, 'Building a Realtime Event Driven API with Kafka and Cassandra', 'active', now(),'Course Era' );
+
 INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
          ... VALUES ( 41111111-1111-1111-1111-111111111111, 'Building reactive Java applications with SPRING', 'active', now(),'Course Era' );
+```
 ## My own data inserts, into my table learner_master: #
+
 INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
 VALUES ( now(), 'SHERLOCK', 'HOLMES', 'active', 'manager');
+
 INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
 VALUES ( now(), 'BRUCE', 'WAYNE', 'active', 'admin');
+
 INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
 VALUES ( now(), 'PETER', 'PARKER', 'active', 'learner');
+
 INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
 VALUES ( now(), 'TONY', 'STARK', 'inactive', 'learner');
 
@@ -100,8 +112,6 @@ VALUES ( 21111111-1111-1111-1111-111111111111, cd5eb810-04c4-11eb-9480-1dee1c068
 
 INSERT INTO learner_curriculum (currid , learnerid , currtitle ,currassigndt ,currcomplstat )
 VALUES ( 21111111-1111-1111-1111-111111111111, cd6e2160-04c4-11eb-9480-1dee1c068ca3, 'Building CRUD applications with Python and NodeJS', '2020-04-01 00:00+0000', 'IN PROGRESS');
-```
-```
 
 # curriculum_master output : #
 
@@ -127,11 +137,12 @@ VALUES ( 21111111-1111-1111-1111-111111111111, cd6e2160-04c4-11eb-9480-1dee1c068
  21111111-1111-1111-1111-111111111111 | cd6e2160-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS | Building CRUD applications with Python and NodeJS
  21111111-1111-1111-1111-111111111111 | cd5eb810-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS |     Introduction to Cassandra for Developers
  11111111-1111-1111-1111-111111111111 | cd5eb810-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS |     Introduction to Cassandra for Developers
+## selecting data statements ##
+
 ```
 select * from curriculum_master;
-```
 
-Include some screenshots!
+```
 
 ## Experiment with CRUD and show the outputs: ##
 
