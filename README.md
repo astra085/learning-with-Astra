@@ -145,11 +145,7 @@ select * from learber_master;
 select * from learner_curriculum;
 
 ```
-## Experimenting with CRUD and showing the outputs: ##
-```
-
-```
-## Updating table learer_curriculum: ##
+##  Experimenting with CRUD and showing the outputs - Updating table learer_curriculum: ##
 ```
 UPDATE learner_master 
 SET llname = 'Pettigrew' 
