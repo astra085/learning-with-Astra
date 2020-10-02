@@ -1,66 +1,134 @@
-# Welcome to Learning with Astra #
+# Building my first set of tables using the CQL consle in Astra #
 
-If you have attended recently our workshops here, we ask you to create your own Github repo showing off your learning journey with Astra. You could use this repo here as a start: fork it and update it with your own examples.
+After having attended recently the "Intro to Cassandra for Developers Workshop" I have experimented with what I have learnt in the workshop to further my learning journey. 
+I have forked the existing repositry shared in the workshop and have updated it with my  own examples.
 
 ## Explain your use case ##
 
-Pick an example application that you could see on Astra and describe the entities and queries for it. 
+Here I am tryingto replicate the data model of a learning application in Astra. I have created 3 tables:
+1. curriculum_master
+2. learner_master
+3. learner_curriculum
 
-Include diagrams, screenshots etc to make it more interesting and better convey your ideas.
-
-## Create your own tables on Astra ##
+## My  tables on Astra ##
 
 Example tables that we used in the workshop:
 
-```
-CREATE TABLE IF NOT EXISTS comments_by_user (
-    userid uuid,
-    commentid timeuuid,
-    videoid uuid,
-    comment text,
-    PRIMARY KEY ((userid), commentid)
-) WITH CLUSTERING ORDER BY (commentid DESC);
-
-CREATE TABLE IF NOT EXISTS comments_by_video (
-    videoid   uuid,
-    commentid timeuuid,
-    userid    uuid,
-    comment   text,
-    PRIMARY KEY ((videoid), commentid)
-) WITH CLUSTERING ORDER BY (commentid DESC);
+## Astra Details ##
+My login - aniruddha.bhattacharya.sap@gmail.com
+Database User Name - ANIRUDDHAB85
+Database - ABH85
+## Table: curriculum_master ##
 ```
 
-Show us your own tables - for the data model of your choice.
+ANIRUDDHAB85@cqlsh:ABHKS> CREATE TABLE IF NOT EXISTS curriculum_master (
+         ...     currid uuid,
+         ...     currtitle text,
+         ...     currstat text,
+         ...     currexpirydt timeuuid,
+         ...     currsource text,
+         ...     PRIMARY KEY (currid));
+```
+## Table: learner_master ##
+```
+ANIRUDDHAB85@cqlsh:ABHKS> CREATE TABLE IF NOT EXISTS learner_master (
+         ...     learnerid uuid,
+         ...     lfname text,
+         ...     llname text,
+         ...     lstat text,
+         ...     lrole text,
+         ...     PRIMARY KEY ((learnerid))
+         ... );
+```
+## Table: learner_curriculum ##         
+```
+ANIRUDDHAB85@cqlsh:ABHKS> CREATE TABLE IF NOT EXISTS learner_curriculum (
+         ...     currid uuid,
+         ...     learnerid uuid,
+         ...     currtitle text,
+         ...     currassigndt timestamp,
+         ...     currcomplstat text,
+         ...     PRIMARY KEY ((currid),learnerid)
+         ... ) WITH CLUSTERING ORDER BY (learnerid DESC);
+```
 
+## My tables ##
+```
+ANIRUDDHAB85@cqlsh:ABHKS> desc tables;
+
+learner_curriculum  curriculum_master  users_by_city
+learner_master      comments_by_user   comments_by_video
 ```
 Update with your own table
+learner_curriculum  curriculum_master learner_master
 ```
-
 ## Insert some data ##
 
 Here some example data that we used in the workshop:
 
 ```
-INSERT INTO comments_by_user (userid, commentid, videoid, comment)
-VALUES (11111111-1111-1111-1111-111111111111, NOW(), 12345678-1234-1111-1111-111111111111, 'I keep watching this video');
 
-INSERT INTO comments_by_user (userid, commentid, videoid, comment)
-VALUES (11111111-1111-1111-1111-111111111111, NOW(), 12345678-1234-1111-1111-111111111111, 'Soo many comments for the same video');
+## My own data inserts, into my table curriculum_master: #
+INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
+         ... VALUES ( 11111111-1111-1111-1111-111111111111, 'Introduction to Cassandra for Developers', 'active', now(),'Course Era');
+INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
+         ... VALUES ( 21111111-1111-1111-1111-111111111111, 'Building CRUD applications with Python and NodeJS', 'active', now(),'Course Era' );
+INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
+         ... VALUES ( 31111111-1111-1111-1111-111111111111, 'Building a Realtime Event Driven API with Kafka and Cassandra', 'active', now(),'Course Era' );
+INSERT INTO curriculum_master (currid, currtitle, currstat, currexpirydt, currsource )
+         ... VALUES ( 41111111-1111-1111-1111-111111111111, 'Building reactive Java applications with SPRING', 'active', now(),'Course Era' );
+## My own data inserts, into my table learner_master: #
+INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
+VALUES ( now(), 'SHERLOCK', 'HOLMES', 'active', 'manager');
+INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
+VALUES ( now(), 'BRUCE', 'WAYNE', 'active', 'admin');
+INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
+VALUES ( now(), 'PETER', 'PARKER', 'active', 'learner');
+INSERT INTO learner_master ( learnerid , lfname , llname , lstat , lrole )
+VALUES ( now(), 'TONY', 'STARK', 'inactive', 'learner');
+
+## My own data inserts, into my table learner_curriculum: #
+
+INSERT INTO learner_curriculum (currid , learnerid , currtitle ,currassigndt ,currcomplstat )
+VALUES ( 11111111-1111-1111-1111-111111111111, cd5eb810-04c4-11eb-9480-1dee1c068ca3, 'Introduction to Cassandra for Developers', '2020-04-01 00:00+0000', 'IN PROGRESS');
+
+INSERT INTO learner_curriculum (currid , learnerid , currtitle ,currassigndt ,currcomplstat )
+VALUES ( 111111111-1111-1111-1111-111111111111, cd6e2160-04c4-11eb-9480-1dee1c068ca3, 'Building CRUD applications with Python and NodeJS', '2020-04-01 00:00+0000', 'IN PROGRESS');
+
+INSERT INTO learner_curriculum (currid , learnerid , currtitle ,currassigndt ,currcomplstat )
+VALUES ( 21111111-1111-1111-1111-111111111111, cd5eb810-04c4-11eb-9480-1dee1c068ca3, 'Introduction to Cassandra for Developers', '2020-04-01 00:00+0000', 'IN PROGRESS');
+
+INSERT INTO learner_curriculum (currid , learnerid , currtitle ,currassigndt ,currcomplstat )
+VALUES ( 21111111-1111-1111-1111-111111111111, cd6e2160-04c4-11eb-9480-1dee1c068ca3, 'Building CRUD applications with Python and NodeJS', '2020-04-01 00:00+0000', 'IN PROGRESS');
+```
 ```
 
-Show off your own data inserts, into your own tables:
+# curriculum_master output : #
 
-```
-Your data goes here
-```
+ currid                               | currexpirydt                         | currsource | currstat | currtitle
+--------------------------------------+--------------------------------------+------------+----------+---------------------------------------------------------------
+ 41111111-1111-1111-1111-111111111111 | 725a81c0-04c3-11eb-9480-1dee1c068ca3 | Course Era |   active |               Building reactive Java applications with SPRING
+ 21111111-1111-1111-1111-111111111111 | 6aa9d160-04c3-11eb-9480-1dee1c068ca3 | Course Era |   active |             Building CRUD applications with Python and NodeJS
+ 31111111-1111-1111-1111-111111111111 | 6e51cac0-04c3-11eb-9480-1dee1c068ca3 | Course Era |   active | Building a Realtime Event Driven API with Kafka and Cassandra
+ 11111111-1111-1111-1111-111111111111 | 65f54a00-04c3-11eb-9480-1dee1c068ca3 | Course Era |   active |                      Introduction to Cassandra for Developers
+ 
+ # learner_master output : #
+ 
+ learnerid                            | lfname   | llname | lrole   | lstat
+--------------------------------------+----------+--------+---------+----------
+ cd5eb810-04c4-11eb-9480-1dee1c068ca3 | SHERLOCK | HOLMES | manager |   active
+ cd6e2160-04c4-11eb-9480-1dee1c068ca3 |    PETER | PARKER | learner |   active
+ cee6deb0-04c4-11eb-9480-1dee1c068ca3 |     TONY |  STARK | learner | inactive
+ cd5fc980-04c4-11eb-9480-1dee1c068ca3 |    BRUCE |  WAYNE |   admin |   active
 
-Now show the output, for example:
-
+# learner_curriculum : #
+ currid                               | learnerid                            | currassigndt                    | currcomplstat | currtitle
+--------------------------------------+--------------------------------------+---------------------------------+---------------+---------------------------------------------------
+ 21111111-1111-1111-1111-111111111111 | cd6e2160-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS | Building CRUD applications with Python and NodeJS
+ 21111111-1111-1111-1111-111111111111 | cd5eb810-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS |     Introduction to Cassandra for Developers
+ 11111111-1111-1111-1111-111111111111 | cd5eb810-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS |     Introduction to Cassandra for Developers
 ```
-SELECT * FROM <your table>;
-...
-...
-...
+select * from curriculum_master;
 ```
 
 Include some screenshots!
@@ -70,7 +138,7 @@ Include some screenshots!
 Examples from the workshop:
 
 ```
-UPDATE comments_by_video 
+UPDATE curriculum_masterx 
 SET comment = 'This is fun!' 
 WHERE videoid = 12345678-1234-1111-1111-111111111111 AND commentid = 494a3f00-e966-11ea-84bf-83e48ffdc8ac;
 
@@ -83,30 +151,7 @@ WHERE videoid = 12345678-1234-1111-1111-111111111111 AND commentid = 494a3f00-e9
 
 SELECT * FROM comments_by_video;
 ```
-
-Show us something similar with your own tables.
-
-Try something different:
-
-Check out the CQL reference and try commands that we did not use in the workshop:
-
-https://docs.datastax.com/en/cql-oss/3.3/cql/cql_reference/cqlReferenceTOC.html
-
-Let us know what you find:
-
-```
-Update with your own examples
-```
-
-Or connect, read and write to your Astra database via other methods.
-
-Tell us how you do it, we would love to know. 
-
-```
-Show your connection code
-```
-
-The starry sky is the limit: Build your own app with Astra and show it off for a chance to have it included with our Sample Galleries
-
-
+# Connection Code #
+Connected to caas-cluster at caas-cluster-dc-1-service:9042.
+[cqlsh 6.8.0 | DSE 6.8.4.145 | CQL spec 3.4.5 | DSE protocol v2]
 
