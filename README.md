@@ -143,24 +143,40 @@ VALUES ( 21111111-1111-1111-1111-111111111111, cd6e2160-04c4-11eb-9480-1dee1c068
 select * from curriculum_master;
 select * from learber_master;
 select * from learner_curriculum;
-```
-## Experiment with CRUD and show the outputs: ##
-```
-Examples from the workshop:
 
 ```
-UPDATE curriculum_masterx 
-SET comment = 'This is fun!' 
-WHERE videoid = 12345678-1234-1111-1111-111111111111 AND commentid = 494a3f00-e966-11ea-84bf-83e48ffdc8ac;
-
-SELECT * FROM comments_by_video;
+## Experimenting with CRUD and showing the outputs: ##
 ```
 
 ```
-DELETE FROM comments_by_video 
-WHERE videoid = 12345678-1234-1111-1111-111111111111 AND commentid = 494a3f00-e966-11ea-84bf-83e48ffdc8ac;
-
-SELECT * FROM comments_by_video;
+## Updating table learer_curriculum: ##
 ```
+UPDATE learner_master 
+SET llname = 'Pettigrew' 
+WHERE learnerid = cd6e2160-04c4-11eb-9480-1dee1c068ca3;
 
+```
+## Verifying updated record in table learer_curriculum: ##
+```
+select * from learner_master where learnerid = cd6e2160-04c4-11eb-9480-1dee1c068ca3;
+
+learnerid                            | lfname | llname    | lrole   | lstat
+--------------------------------------+--------+-----------+---------+--------
+ cd6e2160-04c4-11eb-9480-1dee1c068ca3 |  PETER | Pettigrew | learner | active
+
+```
+## Deleting a record from table learer_curriculum: ##
+```
+DELETE FROM learner_curriculum  
+WHERE currid = 11111111-1111-1111-1111-111111111111 and learnerid = cd5eb810-04c4-11eb-9480-1dee1c068ca3;
+
+```
+## verifying records of table learer_curriculum: ##
+```
+select * from learner_curriculum;
+```
+ currid                               | learnerid                            | currassigndt                    | currcomplstat | currtitle
+--------------------------------------+--------------------------------------+---------------------------------+---------------+---------------------------------------------------
+ 21111111-1111-1111-1111-111111111111 | cd6e2160-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS | Building CRUD applications with Python and NodeJS
+ 21111111-1111-1111-1111-111111111111 | cd5eb810-04c4-11eb-9480-1dee1c068ca3 | 2020-04-01 00:00:00.000000+0000 |   IN PROGRESS |     Introduction to Cassandra for Developers
 
