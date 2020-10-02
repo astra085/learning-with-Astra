@@ -1,9 +1,9 @@
 
 # Building my first set of tables using the CQL console in Astra #
-```
+
 After having attended recently the "Intro to Cassandra for Developers Workshop" I have experimented with what I have learnt in the workshop to further my learning journey. 
 I have forked the existing repositry shared in the workshop and have updated it with my  own examples.
-```
+
 ## Explain your use case ##
 ```
 Here I am trying to replicate the data model of a learning application in Astra. I have created 3 tables:
@@ -15,11 +15,16 @@ Here I am trying to replicate the data model of a learning application in Astra.
 ```
 Example tables that we used in the workshop:
 ```
-## Astra Details ##
+## Astra Account Details ##
 ```
 My login - aniruddha.bhattacharya.sap@gmail.com
 Database User Name - ANIRUDDHAB85
 Database - ABH85
+```
+# Connection Code #
+```
+Connected to caas-cluster at caas-cluster-dc-1-service:9042.
+[cqlsh 6.8.0 | DSE 6.8.4.145 | CQL spec 3.4.5 | DSE protocol v2]
 ```
 ## Table: curriculum_master ##
 ```
@@ -157,7 +162,5 @@ WHERE videoid = 12345678-1234-1111-1111-111111111111 AND commentid = 494a3f00-e9
 
 SELECT * FROM comments_by_video;
 ```
-# Connection Code #
-Connected to caas-cluster at caas-cluster-dc-1-service:9042.
-[cqlsh 6.8.0 | DSE 6.8.4.145 | CQL spec 3.4.5 | DSE protocol v2]
+
 
